@@ -13,7 +13,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 find_package(OpenCV REQUIRED)
 find_package(Boost COMPONENTS filesystem system REQUIRED)
 
-check_include_file(libavcodec/avcodec.h HAVE_SWSCALE)
+check_include_file(libswscale/swscale.h HAVE_SWSCALE)
 if (HAVE_SWSCALE)
 	set(FFMPEG_LIBS avcodec avformat avutil swscale)
 	add_definitions(-DHAVE_SWSCALE)
