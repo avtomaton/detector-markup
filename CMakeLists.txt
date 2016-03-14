@@ -80,7 +80,7 @@ add_executable(${PROJECT_NAME}
 )
 add_dependencies(${PROJECT_NAME} aifil-lib)
 add_dependencies(${PROJECT_NAME} anfisa-lib)
-qt5_use_modules(${PROJECT_NAME} Core Widgets Concurrent Network)
+qt5_use_modules(${PROJECT_NAME} Core Widgets)
 target_link_libraries(${PROJECT_NAME}
 	aifil-utils-video
 	aifil-utils-imgproc
