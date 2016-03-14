@@ -50,6 +50,7 @@ ExternalProject_Add(
 	PREFIX anfisa-lib
 	GIT_REPOSITORY "https://github.com/avtomaton/anfisa.git"
 	GIT_TAG "master"
+	CMAKE_ARGS -DCMAKE_CXX_FLAGS=-I${source_dir}
 	INSTALL_COMMAND "")
 ExternalProject_Get_property(anfisa-lib source_dir)
 include_directories(${source_dir})
