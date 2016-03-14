@@ -76,6 +76,7 @@ add_executable(${PROJECT_NAME}
 	${UI_HEADERS}
 	${QRC_SOURCES}
 )
+add_dependencies(anfisa-lib aifil-lib)
 add_dependencies(${PROJECT_NAME} aifil-lib)
 add_dependencies(${PROJECT_NAME} anfisa-lib)
 qt5_use_modules(${PROJECT_NAME} Core Widgets)
