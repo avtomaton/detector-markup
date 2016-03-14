@@ -233,7 +233,7 @@ bool GroundTruthPoint::empty() const
 	return pic_name.empty() && frame_num == 0;
 }
 
-bool GroundTruthPoint::operator <(const GroundTruthPoint &other)
+bool GroundTruthPoint::operator <(const GroundTruthPoint &other) const
 {
 	bool equal = false;
 	if (frame_num)

@@ -126,7 +126,7 @@ struct GroundTruthPoint
 	GroundTruthPoint();
 	GroundTruthPoint(float cx, float cy, float w, float h);
 	bool empty() const;
-	bool operator<(const GroundTruthPoint &other);
+	bool operator<(const GroundTruthPoint &other) const;
 	void set_coords(float new_x = -1, float new_y = -1, float new_w = -1, float new_h = -1);
 	cv::Rect rect(int frame_w = 100, int frame_h = 100) const;
 	void set_rect(const cv::Rect &rect, int frame_w, int frame_h);
