@@ -21,9 +21,7 @@ else()
 	set(FFMPEG_LIBS avcodec avformat avutil)
 endif()
 
-find_package(Qt5Concurrent REQUIRED)
 find_package(Qt5Core REQUIRED)
-find_package(Qt5Network REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 
 include_directories(${Qt5Concurrent_INCLUDE_DIRS})
