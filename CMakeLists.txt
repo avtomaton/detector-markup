@@ -11,6 +11,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(OpenCV REQUIRED)
+include_directories(${OpenCV_INCLUDE_DIRS})
 find_package(Boost COMPONENTS filesystem system REQUIRED)
 
 check_include_file(libswscale/swscale.h HAVE_SWSCALE)
@@ -32,11 +33,14 @@ include_directories(${Qt5Widgets_INCLUDE_DIRS})
 add_definitions(${Qt5Widgets_DEFINITIONS})
 #add_definitions(-DVERSTR="1.0.0")
 
+list(APPEND EXT_ARGS -DCMAKE_C_FLAGS=${CMAKE_C_FLAGS})
+list(APPEND EXT_ARGS -DCMAKE_EXE_LINKER_FLAGS=${CMAKE_EXE_LINKER_FLAGS})
 ExternalProject_Add(
 	aifil-lib
 	PREFIX aifil-utils
 	GIT_REPOSITORY "https://github.com/avtomaton/toolchain-cpp.git"
 	GIT_TAG "master"
+	CMAKE_ARGS ${EXT_ARGS}
 	INSTALL_COMMAND "")
 ExternalProject_Get_property(aifil-lib source_dir)
 include_directories(${source_dir})
@@ -45,12 +49,14 @@ link_directories(${binary_dir}/common)
 link_directories(${binary_dir}/imgproc)
 link_directories(${binary_dir}/video)
 
+list(APPEND EXT_ARGS -DCMAKE_CXX_FLAGS=-I${source_dir})
+list(APPEND EXT_ARGS -DNO_UTILS=ON)
 ExternalProject_Add(
 	anfisa-lib
 	PREFIX anfisa-lib
 	GIT_REPOSITORY "https://github.com/avtomaton/anfisa.git"
 	GIT_TAG "master"
-	CMAKE_ARGS -DCMAKE_CXX_FLAGS=-I${source_dir}
+	CMAKE_ARGS ${EXT_ARGS}
 	INSTALL_COMMAND "")
 ExternalProject_Get_property(anfisa-lib source_dir)
 include_directories(${source_dir})
