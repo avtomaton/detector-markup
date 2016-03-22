@@ -1662,6 +1662,7 @@ void DemoWindow::keyPressEvent(QKeyEvent* ev)
 	case Qt::Key_End:
 		det_window->end_movie();
 		break;
+	case Qt::Key_F:
 	case Qt::Key_Insert:
 	{
 		int inttype = ui->object_type->currentData().toInt();
@@ -2290,7 +2291,7 @@ void DemoWindow::on_help_act_triggered()
 	str += "<b>end</b>: go to the last frame<br><br>";
 
 	str += "<b>TRACKS MANIPULATION</b><br>";
-	str += "<b>insert</b>: create track<br>";
+	str += "<b>insert</b> or <b>f</b>: create track<br>";
 	str += "<b>ctrl</b>+mouse click on point: clone point to new track<br>";
 	str += "<b>del</b> or <b>backspace</b>: delete point<br>";
 	str += "<b>shift</b>+<b>del</b>: delete track<br>";
