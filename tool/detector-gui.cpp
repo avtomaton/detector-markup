@@ -905,9 +905,10 @@ void DetWindow::update_current_point()
 	if (!cur_sample_point || !cur_sample_track)
 		return;
 
-	cur_sample_track->update_base_pt(*cur_sample_point);
-	results.all_points_correct.update_point(*cur_sample_point);
-	last_gt_point = *cur_sample_point;
+	GroundTruthPoint tmp = *cur_sample_point;
+	cur_sample_track->update_base_pt(tmp);
+	results.all_points_correct.update_point(tmp);
+	last_gt_point = tmp;
 	cur_sample_point = 0;
 	emit gt_track_changed(cur_sample_track->object_id);
 	update();
