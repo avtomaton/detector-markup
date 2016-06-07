@@ -439,7 +439,8 @@ void ObjectTrack::update(bool interpolate)
 		finish_frame = it->second.frame_num;
 	}
 
-	if (!interpolate)
+	// need at least 2 points for interpolation
+	if (!interpolate || points.size() < 2)
 		return;
 
 	points_t new_points;
