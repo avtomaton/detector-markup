@@ -178,9 +178,9 @@ struct ObjectTrack
 	int points_found() const;
 	int points_not_skipped() const;
 
-	void update();
+	void update(bool interpolate = true);
 	void update_type(int new_type, PointList *pt_list = 0);
-	void update_base_pt(GroundTruthPoint ob);
+	void update_base_pt(const GroundTruthPoint &ob, bool interpolate = true);
 	void find_near_frames(int frame, int& frame_low, int& frame_high) const;
 };
 

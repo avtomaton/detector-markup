@@ -403,7 +403,8 @@ ObjectTrack::ObjectTrack(const GroundTruthPoint &point, INTERPOLATION interp):
 	extrapolation_enable(false),
 	start_frame(0), finish_frame(0)
 {
-	update_base_pt(point);
+	//don't interpolate just one point
+	update_base_pt(point, false);
 }
 
 ObjectTrack::POINT_TYPE ObjectTrack::point_type(int frame) const
@@ -420,7 +421,7 @@ ObjectTrack::POINT_TYPE ObjectTrack::point_type(int frame) const
 		return POINT_ABSENT;
 }
 
-void ObjectTrack::update()
+void ObjectTrack::update(bool interpolate)
 {
 	if (points.empty())
 		return;
@@ -437,6 +438,9 @@ void ObjectTrack::update()
 			start_frame = it->second.frame_num;
 		finish_frame = it->second.frame_num;
 	}
+
+	if (!interpolate)
+		return;
 
 	points_t new_points;
 	if (interpolation == INTERP_POLYNOM)
@@ -567,17 +571,17 @@ GroundTruthPoint ObjectTrack::get_point(int frame) const
 	return GroundTruthPoint();
 }
 
-void ObjectTrack::update_base_pt(GroundTruthPoint ob)
+void ObjectTrack::update_base_pt(const GroundTruthPoint &ob, bool interpolate)
 {
-	ob.is_base = true;
 	points[ob.frame_num] = ob;
+	points[ob.frame_num].is_base = true;
 	if (start_frame == 0 || start_frame > ob.frame_num)
 		start_frame = ob.frame_num;
 	if (finish_frame < ob.frame_num)
 		finish_frame = ob.frame_num;
 
 	// TODO: update only part of the track
-	update();
+	update(interpolate);
 }
 
 void ObjectTrack::find_near_frames(int frame, int& frame_low, int& frame_high) const
