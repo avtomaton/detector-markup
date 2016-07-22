@@ -1880,13 +1880,13 @@ void DemoWindow::read_type_name()
 		while (ifs.good())
 		{
 			std::getline(ifs, str);
-			std::list<std::string> elems = aifil::split(str, '\t');
+			std::vector<std::string> elems = aifil::split(str, '\t');
 			if (elems.size() % 2 != 0 || elems.size() < 2)
 			{
 				aifil::log_warning("bad line in types");
 				continue;
 			}
-			std::list<std::string>::iterator it = elems.begin();
+			std::vector<std::string>::iterator it = elems.begin();
 			int type = std::stoi(*it, nullptr, 10);
 			++it;
 			std::string name = *it;
